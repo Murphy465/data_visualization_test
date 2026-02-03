@@ -2010,7 +2010,7 @@
     "href": "python_data_visualization.html#bar-chart-1",
     "title": "Visualizing Data",
     "section": "📊 Bar Chart",
-    "text": "📊 Bar Chart\nBuild a Bar Chart showing the maximum U.S. peak chart position for any album released by 2025 Rock & Roll Hall of Fame inductees.\n\nimport plotly.express as px\n\n#We already have a filtered DataFrame for the 2025 inductees. Since the highest chart position is 1, we need to tell Pandas to find the minimum peakUS chart position for each artist.\nagg_performers_albums_filtered=performers_albums_filtered.groupby('artist', as_index=False)['peakUS'].min()\n\n#Now we build our bar chart\nfig=px.bar(agg_performers_albums_filtered, x='artist', y='peakUS', title=\"Peak US Chart Position: 2025 Rock n Roll Hall of Fame Inductees\", color='artist')\nfig.show()",
+    "text": "📊 Bar Chart\nBuild a Bar Chart showing the maximum U.S. peak chart position for any album released by 2025 Rock & Roll Hall of Fame inductees.\n\nimport plotly.io as pio\npio.renderers.default=\"plotly_mimetype+notebook_connected\" # This statement is needed to display Plotly in html\n\n#We already have a filtered DataFrame for the 2025 inductees. Since the highest chart position is 1, we need to tell Pandas to find the minimum peakUS chart position for each artist.\nagg_performers_albums_filtered=performers_albums_filtered.groupby('artist', as_index=False)['peakUS'].min()\n\n#Now we build our bar chart\nfig=pio.bar(agg_performers_albums_filtered, x='artist', y='peakUS', title=\"Peak US Chart Position: 2025 Rock n Roll Hall of Fame Inductees\", color='artist')\nfig.show()",
     "crumbs": [
       "Python Tutorials",
       "DATA VISUALIZATION",
@@ -2022,7 +2022,7 @@
     "href": "python_data_visualization.html#line-chart-1",
     "title": "Visualizing Data",
     "section": "📈 Line chart",
-    "text": "📈 Line chart\nCreate a line chart that shows the total number of albums released each year by all artists in the performers_albums dataset.\n\n#We already converted 'Release date' to year in the code above. Now we tell Pandas to count the number of occurrences of each 'Year' using the .size() method\n\nagg_for_line_performers_albums=performers_albums.groupby(['Release year'], as_index=False).size()\n\n#Build the chart\nfig2=px.line(agg_for_line_performers_albums, x='Release year', y='size', title=\"Line Chart\", markers=False)\nfig2.show()",
+    "text": "📈 Line chart\nCreate a line chart that shows the total number of albums released each year by all artists in the performers_albums dataset.\n\n#We already converted 'Release date' to year in the code above. Now we tell Pandas to count the number of occurrences of each 'Year' using the .size() method\n\nagg_for_line_performers_albums=performers_albums.groupby(['Release year'], as_index=False).size()\n\n#Build the chart\nfig2=pio.line(agg_for_line_performers_albums, x='Release year', y='size', title=\"Line Chart\", markers=False)\nfig2.show()",
     "crumbs": [
       "Python Tutorials",
       "DATA VISUALIZATION",
@@ -2034,7 +2034,7 @@
     "href": "python_data_visualization.html#scatterplot-1",
     "title": "Visualizing Data",
     "section": "▒ Scatterplot",
-    "text": "▒ Scatterplot\nCreate a scatterplot that visualizes the relationship between the Peak US and Peak UK chart positions for albums released by your favorite artist inducted into the Rock and Roll Hall of Fame.\n\n#We already filtered the DataFrame for our favorite artist. Use this DataFrame to build the chart.\nfig3=px.scatter(kate_bush, x='peakUS', y='peakUK', color='album_title', title=\"Kate Bush Albums: Peak US vs. UK Chart Positions\")\n\nfig3.show()",
+    "text": "▒ Scatterplot\nCreate a scatterplot that visualizes the relationship between the Peak US and Peak UK chart positions for albums released by your favorite artist inducted into the Rock and Roll Hall of Fame.\n\n#We already filtered the DataFrame for our favorite artist. Use this DataFrame to build the chart.\nfig3=pio.scatter(kate_bush, x='peakUS', y='peakUK', color='album_title', title=\"Kate Bush Albums: Peak US vs. UK Chart Positions\")\n\nfig3.show()",
     "crumbs": [
       "Python Tutorials",
       "DATA VISUALIZATION",
