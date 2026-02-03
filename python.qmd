@@ -60,7 +60,7 @@ Explore a collection of open-access, discipline-specific textbooks that are comp
 # Books
 
 ::: {.grid .g-4}
-::: {.g-col-12 .g-col-md-6} 
+::: {.g-col-12 .g-col-md-6 .g-col-lg-4} 
 <div class="card bg-secondary mb-3" style="max-width: 20rem;">
   <div class="card-header">PYTHON CRASH COURSE</div>
   <div class="card-body"><img src="images/cover_pythoncrashcourse.png" alt="python crash course book cover" class="d-block mx-auto" style="max-width: 100%; height: auto;"><h4 class="card-title"><a href="https://search.library.osu.edu/permalink/01OHIOLINK_OSU/1n38col/cdi_globaltitleindex_catalog_345576859">Python crash course : a hands-on, project-based introduction to programming, 3rd edition</a></h4>
@@ -73,7 +73,7 @@ Explore a collection of open-access, discipline-specific textbooks that are comp
 
 :::
 
-::: {.g-col-12 .g-col-md-6}
+::: {.g-col-12 .g-col-md-6 .g-col-lg-4}
 <div class="card bg-secondary mb-3" style="max-width: 20rem;">
   <div class="card-header">AUTOMATE THE BORING STUFF</div>
   <div class="card-body"><img src="images/cover_automateboringstuff.png" alt="automate the boring stuff book cover" class="d-block mx-auto" style="max-width: 100%; height: auto;"><h4 class="card-title"><a href="https://search.library.osu.edu/permalink/01OHIOLINK_OSU/1n38col/cdi_safari_books_v2_9798341620094">Automate the boring stuff with Python : practical programming for total beginners, 3rd edition</a></h4>
@@ -86,7 +86,7 @@ Explore a collection of open-access, discipline-specific textbooks that are comp
 
 :::
 
-::: {.g-col-12 .g-col-md-6}
+::: {.g-col-12 .g-col-md-6 .g-col-lg-4}
 <div class="card bg-secondary mb-3" style="max-width: 20rem;">
   <div class="card-header">PYTHON TOOLS FOR SCIENTISTS</div>
   <div class="card-body"><img src="images/cover_pythontoolsscientists.png" alt="python tools for scientists book cover" class="d-block mx-auto" style="max-width: 100%; height: auto;"><h4 class="card-title"><a href="https://search.library.osu.edu/permalink/01OHIOLINK_OSU/1oqfg3i/alma991085500459808507">Python tools for scientists : an introduction to using Anaconda, Jupyterlab, and Python's scientific libraries</a></h4><p>by Lee Vaughan<br>San Francisco: No Starch Press, 2023.</p>
