@@ -73,4 +73,4 @@ Interactive tools like **Tableau**, **RShiny**, or **Power BI** allow users to e
 Before sharing, ask a colleague or friend to critique your chart:
 - Do they understand the message?
 - Can they use the filters (if interactive)?
-- Does the visual guide them to the insight you intended? --> -->
+- Does the visual guide them to the insight you intended?
