@@ -1,8 +1,8 @@
 project:
   type: website
   resources:
-    - videos/**
-    - images/**
+    - "videos/**"
+    - "images/**"
   execute:
     freeze: auto
 
@@ -15,18 +15,12 @@ website:
     left: 
       - text: "© 2026 The Ohio State University"
         href: https://library.osu.edu/policies/copyright-information
-  # google-analytics: G-BJ38N1FLJT
 
   navbar:
-    
+    search: true
     logo: images/home_standard_icon.png
-    # logo: images/research_commons_logo.jpg
     logo-href: index.qmd
     left:
-      # - icon: house-door
-      #   href: index.qmd
-      # - text: "HOME"
-      #   href: index.qmd
       - text: "Library Resources"
         href: overview.qmd
       - text: "Python Tutorials"
@@ -36,7 +30,6 @@ website:
     right:
       - icon: github
         href: https://github.com/OSU-Libraries-Research-Services/data_visualization
-  search: true
 
   sidebar:
     - title: "Library Resources"
@@ -90,10 +83,6 @@ website:
             - tableau_research_read_interpret_evaluate.ipynb
             - tableau_communicate.ipynb
             - tableau_continue_learning.ipynb
-
-
-
-    
 
 format:
   html:
