@@ -3,8 +3,9 @@ project:
   resources:
     - "videos/**"
     - "images/**"
-  execute:
-    freeze: auto
+
+execute:
+  freeze: true
 
 website:
   title: "Data Visualization"
