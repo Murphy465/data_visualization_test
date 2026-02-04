@@ -870,7 +870,7 @@
     "href": "animals.html#check-for-robots.txt-directives",
     "title": "Lesson 2. Meet the Animals",
     "section": "Check for robots.txt directives",
-    "text": "Check for robots.txt directives\nrobots.txt directives limit web-scraping or web-crawling. Look for this file in the root directory of the website by adding /robots.txt to the end of the url. Respect these directives.\n\n\n\n\nExercise 1: Examine Copyright | Terms of Use\n\n\n\n\n\nLocate and read the terms of use for the Smithsonian’s National Zoo & Conservation Biology Institute\n\n\n\nWhat are the copyright restrictions for this resource?\n\n\nWhat are the terms of use?\n\n\n\n\n\n\n\n\nSolution:\n\n\n\n\n\nThe copyright restrictions for the Smithsonian’s National Zoo & Conservation Biology Institute are listed with the Terms of Use and can be found on the center of the bottom footer of the webpage.",
+    "text": "Check for robots.txt directives\nrobots.txt directives limit web-scraping or web-crawling. Look for this file in the root directory of the website by adding /robots.txt to the end of the url. Respect these directives.\n\n\n\n\nExercise 1: Examine Copyright | Terms of Use\n\n\n\n\nLocate and read the terms of use for the Smithsonian’s National Zoo & Conservation Biology Institute\n\n\n\nWhat are the copyright restrictions for this resource?\n\n\nWhat are the terms of use?\n\n\n\n\n\n\n\n\nSolution:\n\n\n\n\nThe copyright restrictions for the Smithsonian’s National Zoo & Conservation Biology Institute are listed with the Terms of Use and can be found on the center of the bottom footer of the webpage.",
     "crumbs": [
       "Python Tutorials",
       "WEBSITES AND APIS",
