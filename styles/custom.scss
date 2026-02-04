@@ -97,3 +97,17 @@ code, pre, kbd, samp { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco,
   background-color: #ffc3b0 !important;
   border-color: #ffc3b0 !important;
 }
+
+
+/* Set accordion button background to #f3bfbe */
+.accordion-button {
+  background-color: #f3bfbe !important;
+  color: #000; /* Optional: keeps text readable on light pink */
+}
+
+/* Expanded (not-collapsed) state */
+.accordion-button:not(.collapsed) {
+  background-color: #f3bfbe !important;
+  color: #000;
+}
+
