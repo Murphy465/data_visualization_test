@@ -69,6 +69,37 @@ strong, b { font-weight: 700; }
 code, pre, kbd, samp { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 
+/* Force all red text anywhere on the site to use #BA0C2F instead */
+
+/* Bootstrap's red utility classes */
+.text-danger,
+.alert-danger,
+.bg-danger,
+.border-danger {
+  color: #BA0C2F !important;
+  background-color: inherit !important;
+  border-color: #BA0C2F !important;
+}
+
+/* Any element explicitly styled with red text */
+*[style*="color:red"],
+*[style*="color: red"] {
+  color: #BA0C2F !important;
+}
+
+/* Quarto-specific red UI elements (e.g., math errors, warnings, etc.) */
+.quarto-title .quarto-title-author,
+.quarto-color-scheme-toggle:hover,
+code span.er,     /* error tokens */
+code span.kw.err  /* keyword errors */ {
+  color: #BA0C2F !important;
+}
+
+/* Links that may have been styled red */
+a[href][style*="color"] {
+  color: #BA0C2F !important;
+}
+
 /* Remove Simplex box/border and background from breadcrumbs */
 .breadcrumb {
   border: none;              /* Simplex sets a 1px border; turn it off */
