@@ -28,3 +28,10 @@ strong {
   font-weight: 700;  /* Bold Buckeye Sans */
 }
 
+
+/* Emphasis & UI bits using OSU weights */
+strong, b { font-weight: 700; }
+.navbar-brand, .sidebar-title { font-weight: 700; }
+
+/* Ensure code blocks and small UI text stay readable with Sans */
+code, pre, kbd, samp { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
