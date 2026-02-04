@@ -142,3 +142,28 @@ a[href][style*="color"] {
   color: #000;
 }
 
+
+/* Ensure all grid columns behave like equal-height containers */
+.grid > [class*="g-col"] {
+  display: grid;
+}
+
+/* Make every card fill the grid cell vertically */
+.grid .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Allow the card body (image section) to grow/shrink appropriately */
+.grid .card-body {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Push the list-group footer items to the bottom */
+.grid .list-group {
+  margin-top: auto;
+}
+
+
