@@ -1,0 +1,14 @@
+/* Use OSU brand fonts */
+$font-family-sans-serif: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+$font-family-serif: "BuckeyeSerif", "Georgia", serif;
+
+/* Apply Buckeye Sans to body */
+body {
+  font-family: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+}
+
+/* Apply Buckeye Serif to headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "BuckeyeSerif", "Georgia", serif;
+  font-weight: 600;
+}
