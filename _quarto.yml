@@ -87,6 +87,10 @@ website:
 
 format:
   html:
-    theme: simplex
+    theme: 
+      - simplex
+      - styles/custom.scss
+    include-in-header:
+      - styles/osu-fonts.html
     css: styles.css
     toc: true
