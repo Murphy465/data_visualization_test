@@ -79,3 +79,21 @@ code, pre, kbd, samp { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco,
   border-radius: 0;          /* optional: remove any rounding */
 }
 
+
+/* Custom alert background colors */
+.alert-danger {
+  background-color: #f3bfbe !important;
+  border-color: #f3bfbe !important;
+}
+
+/* Info alert */
+.alert-info {
+  background-color: #b3e2f5 !important;
+  border-color: #b3e2f5 !important;
+}
+
+/* Warning alert */
+.alert-warning {
+  background-color: #ffc3b0 !important;
+  border-color: #ffc3b0 !important;
+}
