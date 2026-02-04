@@ -35,7 +35,7 @@ $headings-font-weight: 700 !default;   /* h2–h6 default; we’ll fine‑tune b
 /* Reusable mixins go here (optional). */
 
 /*-- scss:rules --*/
-/* Concrete CSS rules/selectors live here. This is where we apply exact OSU weights. */
+/* Concrete CSS rules/selectors live here. */
 
 /* Apply Buckeye Sans to body text */
 body {
@@ -67,3 +67,15 @@ strong, b { font-weight: 700; }
 
 /* Ensure code blocks and small UI text stay readable with Sans */
 code, pre, kbd, samp { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+
+/* Remove Simplex box/border and background from breadcrumbs */
+.breadcrumb {
+  border: none;              /* Simplex sets a 1px border; turn it off */
+  background: transparent;   /* ensure no background fill */
+  box-shadow: none;          /* in case a theme adds shadows */
+  padding-left: 0;           /* optional: flush-left alignment */
+  padding-right: 0;          /* optional: flush-right alignment */
+  border-radius: 0;          /* optional: remove any rounding */
+}
+
