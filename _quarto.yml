@@ -10,7 +10,7 @@ execute:
 website:
   title: "Data Visualization"
   favicon: images/favicon.ico
-  repo-url: https://github.com/OSU-Libraries-Research-Services/quarto_website
+  repo-url: https://github.com/Murphy465/data_visualization_test
   page-navigation: true
   page-footer: 
     left: 
