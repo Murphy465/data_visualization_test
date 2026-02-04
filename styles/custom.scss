@@ -1,14 +1,30 @@
-/* Use OSU brand fonts */
+/* ------------------------------
+   OSU Typography Overrides
+   ------------------------------ */
+
+/* Set OSU brand fonts as the defaults */
 $font-family-sans-serif: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
 $font-family-serif: "BuckeyeSerif", "Georgia", serif;
 
-/* Apply Buckeye Sans to body */
+/* Apply Buckeye Sans to body text */
 body {
   font-family: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;   /* OSU brand weight */
 }
 
-/* Apply Buckeye Serif to headings */
+/* Headings use Buckeye Serif */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "BuckeyeSerif", "Georgia", serif;
-  font-weight: 600;
+  font-family: "BuckeyeSerif", Georgia, serif;
 }
+
+/* OSU brand weight assignments */
+h1 { font-weight: 900; }   /* Black */
+h2 { font-weight: 700; }   /* Bold */
+h3 { font-weight: 600; }   /* SemiBold */
+h4, h5, h6 { font-weight: 400; }  /* Regular */
+
+/* Optional: OSU-styled emphasized text */
+strong {
+  font-weight: 700;  /* Bold Buckeye Sans */
+}
+
