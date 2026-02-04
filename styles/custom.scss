@@ -112,21 +112,33 @@ a[href][style*="color"] {
 
 
 /* Custom alert background colors */
-.alert-danger {
+.alert-primary {
   background-color: #f3bfbe !important;
-  border-color: #f3bfbe !important;
+  border-color: #e46d6b !important;
 }
 
 /* Info alert */
 .alert-info {
   background-color: #b3e2f5 !important;
-  border-color: #b3e2f5 !important;
+  border-color: #67c5eb !important;
 }
 
 /* Warning alert */
 .alert-warning {
   background-color: #ffc3b0 !important;
-  border-color: #ffc3b0 !important;
+  border-color: #ff8861 !important;
+}
+
+/* Set accordion button background to #f3bfbe */
+.accordion-button {
+  background-color: #fffff !important;
+  color: #000; /* Optional: keeps text readable on light pink */
+}
+
+/* Expanded (not-collapsed) state */
+.accordion-button:not(.collapsed) {
+  background-color: #f3bfbe !important;
+  color: #000;
 }
 
 /* Ensure all grid columns behave like equal-height containers */
