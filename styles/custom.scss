@@ -2,34 +2,66 @@
    OSU Typography Overrides
    ------------------------------ */
 
-/* Set OSU brand fonts as the defaults */
-$font-family-sans-serif: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
-$font-family-serif: "BuckeyeSerif", "Georgia", serif;
+/*-- scss:uses --*/
+/* If you @use or @import additional partials, do it here. 
+   Quarto will place this layer before the others. */
+
+/*-- scss:functions --*/
+/* Add any Sass functions here if needed. Keeping empty is fine. */
+
+/*-- scss:defaults --*/
+/* Variables (fonts, colors, sizes) live here. 
+   These are evaluated before Bootstrap/Bootswatch components are built. */
+
+/* Set OSU brand fonts as the defaults (loaded via styles/osu-fonts.html):
+   Family names per BUX: "BuckeyeSans" and "BuckeyeSerif". */
+$font-family-sans-serif: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif !default;
+$font-family-serif:      "BuckeyeSerif", "Georgia", serif !default;
+
+/* Optional Bootstrap weight variables (helpful defaults) */
+$font-weight-normal:   400 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold:     700 !default;
+
+/* Heading defaults (Bootstrap will apply these broadly) */
+$headings-font-family: $font-family-serif !default;
+$headings-font-weight: 700 !default;   /* h2–h6 default; we’ll fine‑tune below in rules */
+
+/* You can also keep other theme variables here if you want:
+   e.g., $primary: #BB0000;  // OSU Scarlet
+*/
+
+/*-- scss:mixins --*/
+/* Reusable mixins go here (optional). */
+
+/*-- scss:rules --*/
+/* Concrete CSS rules/selectors live here. This is where we apply exact OSU weights. */
 
 /* Apply Buckeye Sans to body text */
 body {
   font-family: "BuckeyeSans", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
-  font-weight: 400;   /* OSU brand weight */
+  font-weight: 400; /* OSU brand weight for normal copy */
 }
 
-/* Headings use Buckeye Serif */
+/* Headings use Buckeye Serif with OSU brand weights:
+   Buckeye Serif 2 supports 400, 600, 700, 900
+   Buckeye Sans 2 supports 400, 600, 700, 800, 900  */
 h1, h2, h3, h4, h5, h6 {
   font-family: "BuckeyeSerif", Georgia, serif;
+  line-height: 1.2;
+  margin-top: 1.2em;
+  margin-bottom: .6em;
 }
 
 /* OSU brand weight assignments */
-h1 { font-weight: 900; }   /* Black */
-h2 { font-weight: 700; }   /* Bold */
-h3 { font-weight: 600; }   /* SemiBold */
-h4, h5, h6 { font-weight: 400; }  /* Regular */
+h1 { font-weight: 900; } /* Black */
+h2 { font-weight: 700; } /* Bold */
+h3 { font-weight: 600; } /* SemiBold */
+h4,
+h5,
+h6 { font-weight: 400; } /* Regular */
 
-/* Optional: OSU-styled emphasized text */
-strong {
-  font-weight: 700;  /* Bold Buckeye Sans */
-}
-
-
-/* Emphasis & UI bits using OSU weights */
+/* OSU-styled emphasized text */
 strong, b { font-weight: 700; }
 .navbar-brand, .sidebar-title { font-weight: 700; }
 
