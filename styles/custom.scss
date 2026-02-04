@@ -129,17 +129,35 @@ a[href][style*="color"] {
   border-color: #ff8861 !important;
 }
 
-/* Set accordion button background to #f3bfbe */
-.accordion-button {
-  background-color: #fffff !important;
-  color: #000; /* Optional: keeps text readable on light pink */
-}
 
-/* Expanded (not-collapsed) state */
-.accordion-button:not(.collapsed) {
-  background-color: #f3bfbe !important;
+/* -----------------------------------------
+   Accordion state colors
+   - Collapsed buttons = white
+   - Expanded buttons = #f3bfbe
+   ----------------------------------------- */
+
+/* Collapsed (default) */
+.accordion-button,
+.accordion-button.collapsed {
+  background-color: #fff;
   color: #000;
 }
+
+/* Expanded (not collapsed) */
+.accordion-button:not(.collapsed) {
+  background-color: #f3bfbe;
+  color: #000;
+  /* Optional: keep a subtle divider like Bootstrap’s inset line */
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: border polish */
+.accordion-item {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: .375rem;
+  overflow: hidden;
+}
+
 
 /* Ensure all grid columns behave like equal-height containers */
 .grid > [class*="g-col"] {
