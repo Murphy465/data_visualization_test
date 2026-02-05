@@ -293,15 +293,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-4.-aggregate-data" id="toc-step-4.-aggregate-data" class="nav-link" data-scroll-target="#step-4.-aggregate-data">Step 4. Aggregate data</a></li>
   <li><a href="#step-5.-plot" id="toc-step-5.-plot" class="nav-link" data-scroll-target="#step-5.-plot">Step 5. Plot</a></li>
   </ul></li>
-  <li><a href="#line-chart" id="toc-line-chart" class="nav-link" data-scroll-target="#line-chart">📈 Line chart</a></li>
-  </ul></li>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a>
+  <li><a href="#line-chart" id="toc-line-chart" class="nav-link" data-scroll-target="#line-chart">📈 Line chart</a>
   <ul class="collapse">
   <li><a href="#step-1.-identify-relevant-columns-and-data-types" id="toc-step-1.-identify-relevant-columns-and-data-types" class="nav-link" data-scroll-target="#step-1.-identify-relevant-columns-and-data-types">Step 1. Identify relevant columns and data types</a></li>
   <li><a href="#step-2.-aggregate-data-and-plot" id="toc-step-2.-aggregate-data-and-plot" class="nav-link" data-scroll-target="#step-2.-aggregate-data-and-plot">Step 2. Aggregate data and plot</a></li>
+  </ul></li>
   <li><a href="#scatterplot" id="toc-scatterplot" class="nav-link" data-scroll-target="#scatterplot">░ Scatterplot</a></li>
   </ul></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
   <li><a href="#plotly" id="toc-plotly" class="nav-link" data-scroll-target="#plotly">PLOTLY</a>
   <ul class="collapse">
   <li><a href="#bar-chart-1" id="toc-bar-chart-1" class="nav-link" data-scroll-target="#bar-chart-1">📊 Bar Chart</a></li>
@@ -932,13 +930,9 @@ Name: peakUS, dtype: float64</code></pre>
 <section id="line-chart" class="level2">
 <h2 class="anchored" data-anchor-id="line-chart">📈 Line chart</h2>
 <p>Line charts reveal trends over time and at minimum require a <strong>date field</strong> and a <strong>measure</strong>. To create a line chart with Pandas, set the <code>kind =</code> parameter to <code>line</code>.</p>
-</section>
-</section>
-<section id="exercise-1" class="level1">
-<h1>Exercise 1</h1>
 <div id="accordionExercise1" class="accordion">
 <div class="accordion-item">
-<h2 class="accordion-header anchored" id="ex1-headingOne" data-anchor-id="exercise-1">
+<h2 class="accordion-header anchored" id="ex1-headingOne">
 <button class="accordion-button fs-3" type="button" data-bs-toggle="collapse" data-bs-target="#ex1-collapseOne" aria-expanded="true" aria-controls="ex1-collapseOne">
 <img src="images/guidepost_standard_icon.png" alt="" aria-hidden="true" style="height: 3rem; vertical-align: middle; margin-right: 0.5rem;">Exercise 1: Pandas Line Chart
 </button>
@@ -1033,16 +1027,13 @@ Name: Release year, Length: 4851, dtype: int32</code></pre>
 </div>
 </div>
 </section>
+</section>
 <section id="scatterplot" class="level2">
 <h2 class="anchored" data-anchor-id="scatterplot">░ Scatterplot</h2>
 <p>Scatterplots are useful for exploring relationships between two or more numerical variables. In Pandas, you can create a scatterplot using the <code>.plot()</code> method by specifying the <strong>x</strong> and <strong>y</strong> keyword arguments.</p>
-</section>
-</section>
-<section id="exercise-2" class="level1">
-<h1>Exercise 2</h1>
 <div id="accordionExercise2" class="accordion">
 <div class="accordion-item">
-<h2 class="accordion-header anchored" id="ex2-headingOne" data-anchor-id="exercise-2">
+<h2 class="accordion-header anchored" id="ex2-headingOne">
 <button class="accordion-button fs-3" type="button" data-bs-toggle="collapse" data-bs-target="#ex2-collapseOne" aria-expanded="true" aria-controls="ex2-collapseOne">
 <img src="images/guidepost_standard_icon.png" alt="" aria-hidden="true" style="height: 3rem; vertical-align: middle; margin-right: 0.5rem;">Exercise 2: Pandas Scatterplot
 </button>
@@ -1082,6 +1073,7 @@ Use the Pandas <a href="https://pandas.pydata.org/docs/reference/api/pandas.Data
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="plotly" class="level1">
 <h1>PLOTLY</h1>
@@ -1130,6 +1122,7 @@ if (outputEl) {{
                         })                };                });            </script>        </div>
 </div>
 </div>
+<p><img src="images/plotly_bar_chart.png" title="Image of Plotly Bar Chart. Jupyter notebooks do not consistently render plotly in Quarto websites" class="img-fluid"></p>
 </section>
 <section id="line-chart-1" class="level2">
 <h2 class="anchored" data-anchor-id="line-chart-1">📈 Line chart</h2>
@@ -1170,6 +1163,7 @@ if (outputEl) {{
                         })                };                });            </script>        </div>
 </div>
 </div>
+<p><img src="images/plotly_line_chart.png" title="Image of Plotly Line Chart. Jupyter notebooks do not consistently render plotly in Quarto websites" class="img-fluid"></p>
 </section>
 <section id="scatterplot-1" class="level2">
 <h2 class="anchored" data-anchor-id="scatterplot-1">▒ Scatterplot</h2>
@@ -1207,6 +1201,7 @@ if (outputEl) {{
                         })                };                });            </script>        </div>
 </div>
 </div>
+<p><img src="images/plotly_scatterplot.png" title="Image of Plotly Scatterplot. Jupyter notebooks do not consistently render plotly in Quarto websites" class="img-fluid"></p>
 </section>
 </section>
 <section id="seaborn" class="level1">
