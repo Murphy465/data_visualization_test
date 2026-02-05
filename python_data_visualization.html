@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -106,6 +106,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <link rel="stylesheet" href="https://assets.bux.osu.edu/bux-webfonts2/bux-webfonts2.css">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -422,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We’ll use the <code>rock_n_roll_performers.csv</code> table from the Wikipedia page on <strong><a href="https://en.wikipedia.org/wiki/List_of_Rock_and_Roll_Hall_of_Fame_inductees">Rock and Roll Hall of Fame inductees</a></strong> to explore plotting with Pandas. The <em>Performers</em> category honors recording artists and bands who have had a significant and lasting impact on the development and legacy of rock and roll. We’ll also enhance our analysis by linking this dataset with <code>rock_n_roll_studio_albums.csv</code> which contains studio album information of many of the inductees.</p>
 <section id="read_csv" class="level4">
 <h4 class="anchored" data-anchor-id="read_csv">.read_csv()</h4>
-<div id="3578d0d1-4784-4054-b592-87a6166bb359" class="cell">
+<div id="3578d0d1-4784-4054-b592-87a6166bb359" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>performers<span class="op">=</span>pd.read_csv(<span class="st">'data/rock_n_roll_performers.csv'</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A UnicodeDecodeError occurs after asking Pandas to read in rock_n_roll_studio_albums. Co-pilot suggests trying a difference encoding, like latin1</span></span>
@@ -433,23 +436,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-2.-merge-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="step-2.-merge-datasets">Step 2. Merge datasets</h3>
 <p>After loading the <strong>performers</strong> and <strong>studio_albums</strong> tables using <code>pd.read_csv</code>, we can inspect the column headers using <code>.columns</code>.</p>
-<div id="e0955572-1432-4b32-a2ee-7cf1c713798d" class="cell">
+<div id="e0955572-1432-4b32-a2ee-7cf1c713798d" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>performers.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>Index(['index', 'year', 'image', 'name', 'inducted_members',
+       'prior_nominations', 'induction_presenter', 'artist', 'image_url',
+       'artist_url'],
+      dtype='object')</code></pre>
 </div>
-<div id="1b635279-7366-462c-bc4c-d7c61a1b656b" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>studio_albums.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="1b635279-7366-462c-bc4c-d7c61a1b656b" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>studio_albums.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>Index(['index', 'album_title', 'artist', 'certification_aria',
+       'certification_aria_status', 'certification_aria_x',
+       'certification_bmvi', 'certification_bmvi_status',
+       'certification_bmvi_x', 'certification_bpi', 'certification_bpi_status',
+       'certification_bpi_x', 'certification_mc', 'certification_mc_status',
+       'certification_mc_x', 'certification_riaa', 'certification_riaa_status',
+       'certification_riaa_x', 'certification_snep',
+       'certification_snep_status', 'certification_snep_x', 'day',
+       'format_4_track', 'format_8_track', 'format_blueray', 'format_box_set',
+       'format_cassette', 'format_cd', 'format_digital_compact_cassette',
+       'format_digital_download', 'format_dvd', 'format_lp',
+       'format_mini_disc', 'format_picture_disc', 'format_reel',
+       'format_streaming', 'format_vhs', 'month', 'peakAUS', 'peakAUT',
+       'peakCAN', 'peakFRA', 'peakGER', 'peakIRE', 'peakITA', 'peakJPN',
+       'peakNLD', 'peakNOR', 'peakNZ', 'peakSPA', 'peakSWE', 'peakSWI',
+       'peakUK', 'peakUS', 'peakUS Country', 'peakUS R&amp;B', 'Record label',
+       'Release date', 'year'],
+      dtype='object')</code></pre>
+</div>
 </div>
 <p>Both datasets share the columns <strong>artist</strong> and <strong>year</strong>, which could be used for merging. However, to avoid confusion after joining, we’ll first rename the header <strong>year</strong> in the <strong>performers</strong> dataset to <strong>year_inducted</strong>.</p>
 <section id="rename" class="level4">
 <h4 class="anchored" data-anchor-id="rename">.rename()</h4>
-<div id="82f9314c-cb1f-4a7e-8ef2-a63c38ae2867" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>performers<span class="op">=</span>performers.rename(columns<span class="op">=</span>{<span class="st">'year'</span>:<span class="st">'year_inducted'</span>})  </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>performers.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="82f9314c-cb1f-4a7e-8ef2-a63c38ae2867" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>performers<span class="op">=</span>performers.rename(columns<span class="op">=</span>{<span class="st">'year'</span>:<span class="st">'year_inducted'</span>})  </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>performers.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>Index(['index', 'year_inducted', 'image', 'name', 'inducted_members',
+       'prior_nominations', 'induction_presenter', 'artist', 'image_url',
+       'artist_url'],
+      dtype='object')</code></pre>
+</div>
 </div>
 <p>Then, we’ll merge the two datasets using the shared <strong>artist</strong> column.</p>
-<div id="325bc730-1419-411c-af37-4b6b91046e8b" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>performers_albums<span class="op">=</span>pd.merge(performers, studio_albums, on<span class="op">=</span><span class="st">'artist'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>performers_albums.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="325bc730-1419-411c-af37-4b6b91046e8b" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>performers_albums<span class="op">=</span>pd.merge(performers, studio_albums, on<span class="op">=</span><span class="st">'artist'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>performers_albums.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>Index(['index_x', 'year_inducted', 'image', 'name', 'inducted_members',
+       'prior_nominations', 'induction_presenter', 'artist', 'image_url',
+       'artist_url', 'index_y', 'album_title', 'certification_aria',
+       'certification_aria_status', 'certification_aria_x',
+       'certification_bmvi', 'certification_bmvi_status',
+       'certification_bmvi_x', 'certification_bpi', 'certification_bpi_status',
+       'certification_bpi_x', 'certification_mc', 'certification_mc_status',
+       'certification_mc_x', 'certification_riaa', 'certification_riaa_status',
+       'certification_riaa_x', 'certification_snep',
+       'certification_snep_status', 'certification_snep_x', 'day',
+       'format_4_track', 'format_8_track', 'format_blueray', 'format_box_set',
+       'format_cassette', 'format_cd', 'format_digital_compact_cassette',
+       'format_digital_download', 'format_dvd', 'format_lp',
+       'format_mini_disc', 'format_picture_disc', 'format_reel',
+       'format_streaming', 'format_vhs', 'month', 'peakAUS', 'peakAUT',
+       'peakCAN', 'peakFRA', 'peakGER', 'peakIRE', 'peakITA', 'peakJPN',
+       'peakNLD', 'peakNOR', 'peakNZ', 'peakSPA', 'peakSWE', 'peakSWI',
+       'peakUK', 'peakUS', 'peakUS Country', 'peakUS R&amp;B', 'Record label',
+       'Release date', 'year'],
+      dtype='object')</code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -459,24 +516,329 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Before applying any filters, it’s important to confirm the data type of the <strong>year_inducted</strong> column in the <strong>performers_albums</strong> DataFrame. This ensures we can perform numerical comparisons or sorting without errors.</p>
 <section id="dtypes" class="level4">
 <h4 class="anchored" data-anchor-id="dtypes">.dtypes</h4>
-<div id="98cc84f7-d081-4d47-a5f4-b61246b3ae23" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>performers_albums[<span class="st">'year_inducted'</span>].dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="98cc84f7-d081-4d47-a5f4-b61246b3ae23" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>performers_albums[<span class="st">'year_inducted'</span>].dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>dtype('int64')</code></pre>
+</div>
 </div>
 <p>We can create and apply <strong>filter</strong> to isolate the <strong>2025 inductees</strong> using the <strong>year_inducted</strong> field.</p>
 </section>
 <section id="filter_variabledfcolumnvalue" class="level4">
 <h4 class="anchored" data-anchor-id="filter_variabledfcolumnvalue">filter_variable=df[‘column’]==value</h4>
-<div id="dd9e44e2-57c1-4771-8c98-a53b8ae3eff2" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#First create the filter</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>_2025_inductees<span class="op">=</span> performers_albums[<span class="st">'year_inducted'</span>]<span class="op">==</span><span class="dv">2025</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="dd9e44e2-57c1-4771-8c98-a53b8ae3eff2" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#First create the filter</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>_2025_inductees<span class="op">=</span> performers_albums[<span class="st">'year_inducted'</span>]<span class="op">==</span><span class="dv">2025</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="filtered_dfdffilter_variable" class="level4">
 <h4 class="anchored" data-anchor-id="filtered_dfdffilter_variable">filtered_df=df[filter_variable]</h4>
-<div id="f74ac124-a68a-4d0b-abb1-aa437b944ec9" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Then apply the filter</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>performers_albums_filtered<span class="op">=</span>performers_albums[_2025_inductees]</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>performers_albums_filtered</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="f74ac124-a68a-4d0b-abb1-aa437b944ec9" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Then apply the filter</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>performers_albums_filtered<span class="op">=</span>performers_albums[_2025_inductees]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>performers_albums_filtered</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">index_x</th>
+<th data-quarto-table-cell-role="th">year_inducted</th>
+<th data-quarto-table-cell-role="th">image</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">inducted_members</th>
+<th data-quarto-table-cell-role="th">prior_nominations</th>
+<th data-quarto-table-cell-role="th">induction_presenter</th>
+<th data-quarto-table-cell-role="th">artist</th>
+<th data-quarto-table-cell-role="th">image_url</th>
+<th data-quarto-table-cell-role="th">artist_url</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">peakSPA</th>
+<th data-quarto-table-cell-role="th">peakSWE</th>
+<th data-quarto-table-cell-role="th">peakSWI</th>
+<th data-quarto-table-cell-role="th">peakUK</th>
+<th data-quarto-table-cell-role="th">peakUS</th>
+<th data-quarto-table-cell-role="th">peakUS Country</th>
+<th data-quarto-table-cell-role="th">peakUS R&amp;B</th>
+<th data-quarto-table-cell-role="th">Record label</th>
+<th data-quarto-table-cell-role="th">Release date</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4770</th>
+<td>264</td>
+<td>2025</td>
+<td>NaN</td>
+<td>Bad Company[193]</td>
+<td>Boz Burrell, Simon Kirke, Mick Ralphs, and Pau...</td>
+<td>First nomination</td>
+<td>NaN</td>
+<td>Bad Company</td>
+<td>/wiki/File:Bad_Company_-_1976.jpg</td>
+<td>/wiki/Bad_Company</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>3.0</td>
+<td>1.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Island, Swan Song</td>
+<td>5/24/1974</td>
+<td>1974</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">4771</th>
+<td>264</td>
+<td>2025</td>
+<td>NaN</td>
+<td>Bad Company[193]</td>
+<td>Boz Burrell, Simon Kirke, Mick Ralphs, and Pau...</td>
+<td>First nomination</td>
+<td>NaN</td>
+<td>Bad Company</td>
+<td>/wiki/File:Bad_Company_-_1976.jpg</td>
+<td>/wiki/Bad_Company</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Island, Swan Song</td>
+<td>3/28/1975</td>
+<td>1975</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4772</th>
+<td>264</td>
+<td>2025</td>
+<td>NaN</td>
+<td>Bad Company[193]</td>
+<td>Boz Burrell, Simon Kirke, Mick Ralphs, and Pau...</td>
+<td>First nomination</td>
+<td>NaN</td>
+<td>Bad Company</td>
+<td>/wiki/File:Bad_Company_-_1976.jpg</td>
+<td>/wiki/Bad_Company</td>
+<td>...</td>
+<td>NaN</td>
+<td>23.0</td>
+<td>NaN</td>
+<td>4.0</td>
+<td>5.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Island, Swan Song</td>
+<td>1/30/1976</td>
+<td>1976</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">4773</th>
+<td>264</td>
+<td>2025</td>
+<td>NaN</td>
+<td>Bad Company[193]</td>
+<td>Boz Burrell, Simon Kirke, Mick Ralphs, and Pau...</td>
+<td>First nomination</td>
+<td>NaN</td>
+<td>Bad Company</td>
+<td>/wiki/File:Bad_Company_-_1976.jpg</td>
+<td>/wiki/Bad_Company</td>
+<td>...</td>
+<td>NaN</td>
+<td>32.0</td>
+<td>NaN</td>
+<td>17.0</td>
+<td>15.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Island, Swan Song</td>
+<td>3/3/1977</td>
+<td>1977</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4774</th>
+<td>264</td>
+<td>2025</td>
+<td>NaN</td>
+<td>Bad Company[193]</td>
+<td>Boz Burrell, Simon Kirke, Mick Ralphs, and Pau...</td>
+<td>First nomination</td>
+<td>NaN</td>
+<td>Bad Company</td>
+<td>/wiki/File:Bad_Company_-_1976.jpg</td>
+<td>/wiki/Bad_Company</td>
+<td>...</td>
+<td>NaN</td>
+<td>9.0</td>
+<td>NaN</td>
+<td>10.0</td>
+<td>3.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Swan Song</td>
+<td>3/7/1979</td>
+<td>1979</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4846</th>
+<td>270</td>
+<td>2025</td>
+<td>NaN</td>
+<td>The White Stripes[193]</td>
+<td>Jack White and Meg White.[197][198]</td>
+<td>1 (2023)</td>
+<td>NaN</td>
+<td>The White Stripes</td>
+<td>/wiki/File:Jack_%26_Meg,_The_White_Stripes.jpg</td>
+<td>/wiki/The_White_Stripes</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>137.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Sympathy for the Record Industry</td>
+<td>6/20/2000</td>
+<td>2000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">4847</th>
+<td>270</td>
+<td>2025</td>
+<td>NaN</td>
+<td>The White Stripes[193]</td>
+<td>Jack White and Meg White.[197][198]</td>
+<td>1 (2023)</td>
+<td>NaN</td>
+<td>The White Stripes</td>
+<td>/wiki/File:Jack_%26_Meg,_The_White_Stripes.jpg</td>
+<td>/wiki/The_White_Stripes</td>
+<td>...</td>
+<td>NaN</td>
+<td>53.0</td>
+<td>NaN</td>
+<td>55.0</td>
+<td>61.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Sympathy for the Record Industry, Third Man Re...</td>
+<td>7/3/2001</td>
+<td>2001</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4848</th>
+<td>270</td>
+<td>2025</td>
+<td>NaN</td>
+<td>The White Stripes[193]</td>
+<td>Jack White and Meg White.[197][198]</td>
+<td>1 (2023)</td>
+<td>NaN</td>
+<td>The White Stripes</td>
+<td>/wiki/File:Jack_%26_Meg,_The_White_Stripes.jpg</td>
+<td>/wiki/The_White_Stripes</td>
+<td>...</td>
+<td>NaN</td>
+<td>7.0</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>6.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>V2</td>
+<td>4/1/2003</td>
+<td>2003</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">4849</th>
+<td>270</td>
+<td>2025</td>
+<td>NaN</td>
+<td>The White Stripes[193]</td>
+<td>Jack White and Meg White.[197][198]</td>
+<td>1 (2023)</td>
+<td>NaN</td>
+<td>The White Stripes</td>
+<td>/wiki/File:Jack_%26_Meg,_The_White_Stripes.jpg</td>
+<td>/wiki/The_White_Stripes</td>
+<td>...</td>
+<td>NaN</td>
+<td>8.0</td>
+<td>NaN</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>V2</td>
+<td>6/7/2005</td>
+<td>2005</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4850</th>
+<td>270</td>
+<td>2025</td>
+<td>NaN</td>
+<td>The White Stripes[193]</td>
+<td>Jack White and Meg White.[197][198]</td>
+<td>1 (2023)</td>
+<td>NaN</td>
+<td>The White Stripes</td>
+<td>/wiki/File:Jack_%26_Meg,_The_White_Stripes.jpg</td>
+<td>/wiki/The_White_Stripes</td>
+<td>...</td>
+<td>NaN</td>
+<td>9.0</td>
+<td>NaN</td>
+<td>1.0</td>
+<td>2.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Third Man, Warner Bros.</td>
+<td>6/15/2007</td>
+<td>2007</td>
+</tr>
+</tbody>
+</table>
+
+<p>81 rows × 68 columns</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -528,8 +890,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="groupby" class="level4">
 <h4 class="anchored" data-anchor-id="groupby">.groupby()</h4>
 <p>To calculate statistics grouped by category—such as average chart positions by artist or year—we use the <strong><a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html#aggregating-statistics-grouped-by-category">.groupby()</a></strong> method. This allows us to aggregate data based on one or more columns before applying summary functions.</p>
-<div id="c5b295b3-c8fd-4ff7-bf1b-82edcef2084b" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>performers_albums_filtered.groupby(<span class="st">'artist'</span>)[<span class="st">'peakUS'</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c5b295b3-c8fd-4ff7-bf1b-82edcef2084b" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>performers_albums_filtered.groupby(<span class="st">'artist'</span>)[<span class="st">'peakUS'</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>artist
+Bad Company          41.000000
+Chubby Checker       57.333333
+Cyndi Lauper         59.100000
+Joe Cocker           62.571429
+Outkast               4.833333
+Soundgarden          31.000000
+The White Stripes    18.000000
+Name: peakUS, dtype: float64</code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -542,8 +915,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>xlabel = ’’ (removes the redundant label on the x-axis)</li>
 <li>title = ‘Peak US Chart Position: Rock N Roll Hall of Fame Inductees’ (= newline)</li>
 </ul>
-<div id="fc388cd4-fe80-46d7-b20d-34d06341cda4" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>performers_albums_filtered.groupby(<span class="st">'artist'</span>)[<span class="st">'peakUS'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>).plot(kind<span class="op">=</span><span class="st">'bar'</span>, xlabel<span class="op">=</span><span class="st">''</span>, title<span class="op">=</span><span class="st">'Average Peak US Chart Position: </span><span class="ch">\n</span><span class="st"> 2025 Rock N Roll Hall of Fame Inductees'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fc388cd4-fe80-46d7-b20d-34d06341cda4" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>performers_albums_filtered.groupby(<span class="st">'artist'</span>)[<span class="st">'peakUS'</span>].mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>).plot(kind<span class="op">=</span><span class="st">'bar'</span>, xlabel<span class="op">=</span><span class="st">''</span>, title<span class="op">=</span><span class="st">'Average Peak US Chart Position: </span><span class="ch">\n</span><span class="st"> 2025 Rock N Roll Hall of Fame Inductees'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="python_data_visualization_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -576,10 +956,10 @@ Aggregate data and plot
 <h3 class="anchored" data-anchor-id="step-1.-identify-relevant-columns-and-data-types">Step 1. Identify relevant columns and data types</h3>
 <p>Before creating a chart, the first step is to identify which columns are needed for the visualization. Once those columns are selected, we’ll check their data types to ensure they are suitable for analysis and plotting.</p>
 <div id="c08073bf-7163-4718-975e-44fa9204bf12" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>performers_albums.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>performers_albums.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="463a1759-0b86-4544-b383-4c3ea771e54c" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>performers_albums[<span class="st">'Release date'</span>].dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>performers_albums[<span class="st">'Release date'</span>].dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>In Pandas, <strong>dtype(‘O’)</strong> stands for <strong>object</strong> data type. This is a general-purpose type used when a column contains:</p>
 <ul>
@@ -590,15 +970,15 @@ Aggregate data and plot
 <p>So if you see <strong>dtype(‘O’)</strong> for a column, it usually means that column contains text or string values.</p>
 <p>To convert <strong>Release date</strong> to year</p>
 <div id="501008fe-1c68-4d1d-bc24-bc5b8e666129" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>performers_albums[<span class="st">'Release year'</span>]<span class="op">=</span>performers_albums[<span class="st">'Release date'</span>].dt.year</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>performers_albums[<span class="st">'Release year'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>performers_albums[<span class="st">'Release year'</span>]<span class="op">=</span>performers_albums[<span class="st">'Release date'</span>].dt.year</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>performers_albums[<span class="st">'Release year'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="step-2.-aggregate-data-and-plot" class="level3">
 <h3 class="anchored" data-anchor-id="step-2.-aggregate-data-and-plot">Step 2. Aggregate data and plot</h3>
 <p>Group the album titles by <strong>Release year</strong> and then count <strong>album_title</strong> and set <strong>.plot(kind=‘line’)</strong>.</p>
 <div id="6e452bf8-869e-4bfb-96a7-8b339d0c0289" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>performers_albums.groupby(<span class="st">'Release year'</span>)[<span class="st">'album_title'</span>].count().plot(kind<span class="op">=</span><span class="st">'line'</span>, xlabel<span class="op">=</span><span class="st">''</span>, title<span class="op">=</span><span class="st">'Line Chart'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>performers_albums.groupby(<span class="st">'Release year'</span>)[<span class="st">'album_title'</span>].count().plot(kind<span class="op">=</span><span class="st">'line'</span>, xlabel<span class="op">=</span><span class="st">''</span>, title<span class="op">=</span><span class="st">'Line Chart'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -631,18 +1011,18 @@ Use the Pandas <a href="https://pandas.pydata.org/docs/reference/api/pandas.Data
 </h2>
 <div id="ex2-collapseTwo" class="accordion-collapse collapse" aria-labelledby="ex2-headingTwo" data-bs-parent="#accordionExercise2">
 <div class="accordion-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>carmen_ohio<span class="op">=</span><span class="bu">open</span>(<span class="st">'carmen_ohio.txt'</span>, mode<span class="op">=</span><span class="st">'r'</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>).read()</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># first 250 characters</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Step 1. Create and apply a filter for your favorite artist</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>favorite_artist<span class="op">=</span>performers_albums[<span class="st">'artist'</span>]<span class="op">==</span><span class="st">'Kate Bush'</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>kate_bush<span class="op">=</span>performers_albums[favorite_artist]</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Step 2. Plot the x and y axis</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>kate_bush.plot.scatter(x<span class="op">=</span><span class="st">'peakUS'</span>,y<span class="op">=</span><span class="st">'peakUK'</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#BONUS</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_xaxis()</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_yaxis()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>carmen_ohio<span class="op">=</span><span class="bu">open</span>(<span class="st">'carmen_ohio.txt'</span>, mode<span class="op">=</span><span class="st">'r'</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>).read()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># first 250 characters</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Step 1. Create and apply a filter for your favorite artist</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>favorite_artist<span class="op">=</span>performers_albums[<span class="st">'artist'</span>]<span class="op">==</span><span class="st">'Kate Bush'</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>kate_bush<span class="op">=</span>performers_albums[favorite_artist]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Step 2. Plot the x and y axis</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>kate_bush.plot.scatter(x<span class="op">=</span><span class="st">'peakUS'</span>,y<span class="op">=</span><span class="st">'peakUK'</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#BONUS</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_xaxis()</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_yaxis()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -658,16 +1038,16 @@ Use the Pandas <a href="https://pandas.pydata.org/docs/reference/api/pandas.Data
 <h2 class="anchored" data-anchor-id="bar-chart-1">📊 Bar Chart</h2>
 <p>Build a Bar Chart showing the maximum U.S. peak chart position for any album released by <strong><a href="https://en.wikipedia.org/wiki/List_of_Rock_and_Roll_Hall_of_Fame_inductees">2025 Rock &amp; Roll Hall of Fame inductees</a></strong>.</p>
 <div id="35272889-c11c-448c-b9fb-c5d92e36e1ec" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pio.renderers.default<span class="op">=</span><span class="st">"notebook"</span> <span class="co"># This statement is needed to display Plotly in html</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#We already have a filtered DataFrame for the 2025 inductees. Since the highest chart position is 1, we need to tell Pandas to find the minimum peakUS chart position for each artist.</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>agg_performers_albums_filtered<span class="op">=</span>performers_albums_filtered.groupby(<span class="st">'artist'</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'peakUS'</span>].<span class="bu">min</span>()</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we build our bar chart</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>pio.bar(agg_performers_albums_filtered, x<span class="op">=</span><span class="st">'artist'</span>, y<span class="op">=</span><span class="st">'peakUS'</span>, title<span class="op">=</span><span class="st">"Peak US Chart Position: 2025 Rock n Roll Hall of Fame Inductees"</span>, color<span class="op">=</span><span class="st">'artist'</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pio.renderers.default<span class="op">=</span><span class="st">"notebook"</span> <span class="co"># This statement is needed to display Plotly in html</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#We already have a filtered DataFrame for the 2025 inductees. Since the highest chart position is 1, we need to tell Pandas to find the minimum peakUS chart position for each artist.</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>agg_performers_albums_filtered<span class="op">=</span>performers_albums_filtered.groupby(<span class="st">'artist'</span>, as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">'peakUS'</span>].<span class="bu">min</span>()</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we build our bar chart</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>pio.bar(agg_performers_albums_filtered, x<span class="op">=</span><span class="st">'artist'</span>, y<span class="op">=</span><span class="st">'peakUS'</span>, title<span class="op">=</span><span class="st">"Peak US Chart Position: 2025 Rock n Roll Hall of Fame Inductees"</span>, color<span class="op">=</span><span class="st">'artist'</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="images/plotly_bar_chart.png" title="Image of Plotly Bar Chart. Jupyter notebooks do not consistently render plotly in Quarto websites" class="img-fluid"></p>
 </section>
@@ -675,13 +1055,13 @@ Use the Pandas <a href="https://pandas.pydata.org/docs/reference/api/pandas.Data
 <h2 class="anchored" data-anchor-id="line-chart-1">📈 Line chart</h2>
 <p>Create a line chart that shows the total number of albums released each year by all artists in the <code>performers_albums</code> dataset.</p>
 <div id="370bbe7d-326b-434c-a5df-9d26c6033aed" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We already converted 'Release date' to year in the code above. Now we tell Pandas to count the number of occurrences of each 'Year' using the .size() method</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>agg_for_line_performers_albums<span class="op">=</span>performers_albums.groupby([<span class="st">'Release year'</span>], as_index<span class="op">=</span><span class="va">False</span>).size()</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Build the chart</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>fig2<span class="op">=</span>pio.line(agg_for_line_performers_albums, x<span class="op">=</span><span class="st">'Release year'</span>, y<span class="op">=</span><span class="st">'size'</span>, title<span class="op">=</span><span class="st">"Line Chart"</span>, markers<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>fig2.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We already converted 'Release date' to year in the code above. Now we tell Pandas to count the number of occurrences of each 'Year' using the .size() method</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>agg_for_line_performers_albums<span class="op">=</span>performers_albums.groupby([<span class="st">'Release year'</span>], as_index<span class="op">=</span><span class="va">False</span>).size()</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Build the chart</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>fig2<span class="op">=</span>pio.line(agg_for_line_performers_albums, x<span class="op">=</span><span class="st">'Release year'</span>, y<span class="op">=</span><span class="st">'size'</span>, title<span class="op">=</span><span class="st">"Line Chart"</span>, markers<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>fig2.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="images/plotly_line_chart.png" title="Image of Plotly Line Chart. Jupyter notebooks do not consistently render plotly in Quarto websites" class="img-fluid"></p>
 </section>
@@ -689,10 +1069,10 @@ Use the Pandas <a href="https://pandas.pydata.org/docs/reference/api/pandas.Data
 <h2 class="anchored" data-anchor-id="scatterplot-1">▒ Scatterplot</h2>
 <p>Create a scatterplot that visualizes the relationship between the Peak US and Peak UK chart positions for albums released by your favorite artist inducted into the Rock and Roll Hall of Fame.</p>
 <div id="458028d0-fa33-4f1c-a588-5525d2d92b04" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We already filtered the DataFrame for our favorite artist. Use this DataFrame to build the chart.</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fig3<span class="op">=</span>pio.scatter(kate_bush, x<span class="op">=</span><span class="st">'peakUS'</span>, y<span class="op">=</span><span class="st">'peakUK'</span>, color<span class="op">=</span><span class="st">'album_title'</span>, title<span class="op">=</span><span class="st">"Kate Bush Albums: Peak US vs. UK Chart Positions"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>fig3.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We already filtered the DataFrame for our favorite artist. Use this DataFrame to build the chart.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>fig3<span class="op">=</span>pio.scatter(kate_bush, x<span class="op">=</span><span class="st">'peakUS'</span>, y<span class="op">=</span><span class="st">'peakUK'</span>, color<span class="op">=</span><span class="st">'album_title'</span>, title<span class="op">=</span><span class="st">"Kate Bush Albums: Peak US vs. UK Chart Positions"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>fig3.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="images/plotly_scatterplot.png" title="Image of Plotly Scatterplot. Jupyter notebooks do not consistently render plotly in Quarto websites" class="img-fluid"></p>
 </section>
@@ -704,18 +1084,18 @@ Use the Pandas <a href="https://pandas.pydata.org/docs/reference/api/pandas.Data
 <h2 class="anchored" data-anchor-id="bar-chart-2">📊 Bar Chart</h2>
 <p>Build a <strong><a href="https://seaborn.pydata.org/generated/seaborn.barplot.html#seaborn.barplot">Bar Chart</a></strong> showing the maximum U.S. peak chart position for any album released by <strong><a href="https://en.wikipedia.org/wiki/List_of_Rock_and_Roll_Hall_of_Fame_inductees">2025 Rock &amp; Roll Hall of Fame inductees</a></strong>.</p>
 <div id="434ea2f0-7657-4e74-8ada-3c375bca82dd" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Create bar chart</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'artist'</span>, y<span class="op">=</span><span class="st">'peakUS'</span>, data<span class="op">=</span>agg_performers_albums_filtered)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title and labels</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Peak US Chart Position </span><span class="ch">\n</span><span class="st"> 2025 Rock n Roll Hall of Fame Inductees"</span>)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">""</span>)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Peak US chart position"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Create bar chart</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'artist'</span>, y<span class="op">=</span><span class="st">'peakUS'</span>, data<span class="op">=</span>agg_performers_albums_filtered)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title and labels</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Peak US Chart Position </span><span class="ch">\n</span><span class="st"> 2025 Rock n Roll Hall of Fame Inductees"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">""</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Peak US chart position"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="line-chart-2" class="level2">
@@ -758,23 +1138,23 @@ Name the chart
 </h2>
 <div id="ex3-collapseTwo" class="accordion-collapse collapse" aria-labelledby="ex3-headingTwo" data-bs-parent="#accordionExercise3">
 <div class="accordion-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Line chart</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#remove gridlines</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"white"</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#despine (i.e. remove borders)</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>sns.despine(top<span class="op">=</span><span class="va">True</span>, right<span class="op">=</span><span class="va">True</span>, left<span class="op">=</span><span class="va">True</span>, bottom<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Group and count number of release years using Pandas .size() method. Reset the index and name the reset index 'count'</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>released_albums_by_year<span class="op">=</span>performers_albums.groupby([<span class="st">'Release year'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Build chart</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>released_albums_by_year, x<span class="op">=</span><span class="st">'Release year'</span>, y<span class="op">=</span><span class="st">'count'</span>)</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Line Chart"</span>)</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">""</span>)</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"# albums released"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Line chart</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#remove gridlines</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#despine (i.e. remove borders)</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>sns.despine(top<span class="op">=</span><span class="va">True</span>, right<span class="op">=</span><span class="va">True</span>, left<span class="op">=</span><span class="va">True</span>, bottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Group and count number of release years using Pandas .size() method. Reset the index and name the reset index 'count'</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>released_albums_by_year<span class="op">=</span>performers_albums.groupby([<span class="st">'Release year'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Build chart</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>released_albums_by_year, x<span class="op">=</span><span class="st">'Release year'</span>, y<span class="op">=</span><span class="st">'count'</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Line Chart"</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">""</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"# albums released"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -808,9 +1188,9 @@ Using the Seaborn library’s <a href="https://seaborn.pydata.org/tutorial/relat
 </h2>
 <div id="ex4-collapseTwo" class="accordion-collapse collapse" aria-labelledby="ex4-headingTwo" data-bs-parent="#accordionExercise4">
 <div class="accordion-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We already filtered the DataFrame for our favorite artist. Use this DataFrame to build the chart.</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>kate_bush, x<span class="op">=</span><span class="st">'peakUS'</span>, y<span class="op">=</span><span class="st">'peakUK'</span>, hue<span class="op">=</span><span class="st">'album_title'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#We already filtered the DataFrame for our favorite artist. Use this DataFrame to build the chart.</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>kate_bush, x<span class="op">=</span><span class="st">'peakUS'</span>, y<span class="op">=</span><span class="st">'peakUK'</span>, hue<span class="op">=</span><span class="st">'album_title'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
