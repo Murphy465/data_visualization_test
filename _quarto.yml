@@ -95,4 +95,3 @@ format:
       - styles/osu-fonts.html
     css: styles.css
     toc: true
-    embed-resources: true
