@@ -2022,7 +2022,7 @@
     "href": "python_data_visualization.html#bar-chart-1",
     "title": "Visualizing Data",
     "section": "📊 Bar Chart",
-    "text": "📊 Bar Chart\nBuild a Bar Chart showing the maximum U.S. peak chart position for any album released by 2025 Rock & Roll Hall of Fame inductees.\n\nimport plotly.io as pio\npio.renderers.default=\"plotly_mimetype+notebook_connected\" # This statement is needed to display Plotly in html\n\n#We already have a filtered DataFrame for the 2025 inductees. Since the highest chart position is 1, we need to tell Pandas to find the minimum peakUS chart position for each artist.\nagg_performers_albums_filtered=performers_albums_filtered.groupby('artist', as_index=False)['peakUS'].min()\n\n#Now we build our bar chart\nfig=pio.bar(agg_performers_albums_filtered, x='artist', y='peakUS', title=\"Peak US Chart Position: 2025 Rock n Roll Hall of Fame Inductees\", color='artist')\nfig.show()",
+    "text": "📊 Bar Chart\nBuild a Bar Chart showing the maximum U.S. peak chart position for any album released by 2025 Rock & Roll Hall of Fame inductees.\n\nimport plotly.io as pio\npio.renderers.default=\"notebook\" # This statement is needed to display Plotly in html\n\n#We already have a filtered DataFrame for the 2025 inductees. Since the highest chart position is 1, we need to tell Pandas to find the minimum peakUS chart position for each artist.\nagg_performers_albums_filtered=performers_albums_filtered.groupby('artist', as_index=False)['peakUS'].min()\n\n#Now we build our bar chart\nfig=pio.bar(agg_performers_albums_filtered, x='artist', y='peakUS', title=\"Peak US Chart Position: 2025 Rock n Roll Hall of Fame Inductees\", color='artist')\nfig.show()",
     "crumbs": [
       "Python Tutorials",
       "DATA VISUALIZATION",
