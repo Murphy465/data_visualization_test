@@ -31,6 +31,8 @@ $headings-font-weight: 700 !default;   /* h2–h6 default; we’ll fine‑tune b
 $link-color: #BA0C2F !default;
 $link-hover-color: darken(#BA0C2F, 12%) !default;
 
+/* Make Bootstrap “primary” = OSU Scarlet */
+$primary: #BA0C2F !default;
 
 /* You can also keep other theme variables here if you want:
    e.g., $primary: #BB0000;  // OSU Scarlet
