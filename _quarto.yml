@@ -84,7 +84,6 @@ website:
             - tableau_research_read_interpret_evaluate.ipynb
             - tableau_communicate.ipynb
             - tableau_continue_learning.ipynb
-            - test_accordion.ipynb
 
 format:
   html:
